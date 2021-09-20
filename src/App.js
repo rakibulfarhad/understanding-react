@@ -1,23 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
+import Device from './componants/Device/Device';
+import { useEffect, useState } from 'react';
+import Books from './componants/Books/Books';
 
 function App() {
+  const [steps, setSteps] =useState(0);
+  const books = [
+    {name: 'Small Giants', author: 'bo'},
+    { name: 'Build to sell', author: 'john' },
+    { name: 'Grind it', author: 'Ray' },
+    { name: 'Shoe Dog', author: 'bo' },
+  ]
+  const handleIncreaseSteps = () => {
+    const newStepsCount = steps + 1;
+    setSteps(newStepsCount);
+  }
+  useEffect( () => {
+    console.log(steps);
+  }, [steps]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h3 title="my awesome tooltip">My Steps: {steps}</h3>
+      <button onClick={handleIncreaseSteps}>Walk</button>
+      <Device name="phone" steps={steps} price="13500"/>
+      <Books books={books}/>
     </div>
   );
 }
